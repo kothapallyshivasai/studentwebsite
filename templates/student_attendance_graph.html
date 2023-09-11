@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'includes.html' %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/media/science.png">
+    <title>Student Attendance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        $(document).ready(function() {
+          var home = document.getElementById("dashboard");
+          var attendance = document.getElementById("attendance");
+          home.classList.remove("active");
+          attendance.classList.add("active");
+          var navbarChange = document.getElementById("navbar_change");
+          navbarChange.classList.replace("col-lg-2", "col-xl-2");
+        });
+    </script>
+</head>
+<body>
+    {% include 'home_design.html' %}
+    <div class="col-xl-10 col-12 background-setter">
+        <div class="card mt-2">
+            <div class="card-body bg-muted">
+                Overall Attendance: {{attendance.total_attendance}}%
+                <canvas id="attendanceChart"></canvas>
+            <script>
+            var attendanceData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+                 'September', 'October', 'November', 'December'],
+                datasets: [
+                    {
+                        label: 'Attendance for each month out of total',
+                        data: [
+                        "{{attendance.january_attendance}}",
+                        "{{attendance.febraury_attendance}}",
+                        "{{attendance.march_attendance}}",
+                        "{{attendance.april_attendance}}",
+                        "{{attendance.may_attendance}}",
+                        "{{attendance.june_attendance}}",
+                        "{{attendance.july_attendance}}",
+                        "{{attendance.august_attendance}}",
+                        "{{attendance.september_attendance}}",
+                        "{{attendance.october_attendance}}",
+                        "{{attendance.november_attendance}}",
+                        "{{attendance.december_attendance}}"
+                        ],
+                        backgroundColor: [
+                        "{% if attendance.january_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.febraury_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.march_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.april_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.may_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.june_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.july_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.august_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.september_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.october_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.november_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                        "{% if attendance.december_attendance > 69 %} lightgreen {% else %} red {% endif %}",
+                ],
+                        borderColor: 'black',
+                        borderWidth: 1
+                    }
+                ]
+            };
+    
+            var ctx = document.getElementById('attendanceChart').getContext('2d');
+            var attendanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: attendanceData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        </script>
+            </div>
+        </div>
+        <div class="mt-2"></div>
+    </div>
+
+
+    {% include 'logout_popup.html' %}
+
+</body>
+</html>

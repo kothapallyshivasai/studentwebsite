@@ -1,0 +1,104 @@
+<style>
+    .image-heading-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .image-heading-container img {
+        margin-right: 10px;
+        
+    }
+    .alert {
+      margin-bottom: 0;
+    }
+        
+    .col-md-10 {
+        padding-top: 0;
+    }
+
+    .background-setter{
+      background-image: url("/media/images/background_student_dashboard.png");
+      background-size: cover;
+    }
+
+    .wallpaper-photo-student{
+      background-image: url("/media/{{object.student_picture}}");
+      background-size: cover;
+    }
+
+    .no-margin {
+      margin-bottom: -13px;
+    }
+</style>
+
+<script>
+    function logout() {
+        $('#myModal').modal('show');
+      }
+</script>
+<div class="container-fluid bg-secondary">
+    <div class="row">
+        <div class="col-sm-12 d-flex align-items-center justify-content-between">
+            <div class="image-heading-container">
+                <img src="/media/images/graduated.png" class="ml-4" style="height: 50px; width: 50px;" alt="Logo of a graduated student">
+                <h3>Student Website</h3>
+            </div>
+            <a href="#" onclick="logout()">
+            <img src="/media/images/logout.png" alt="Logout logo" class="mr-3" style="height: 40px; width: 40px;">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="alert alert-warning alert-dismissible fade show" id="welcome_heading" role="alert">
+    <strong>Welcome {{user.first_name}} {{user.last_name}}</strong>, It's a pleasure to connect with you today. How can we assist you?
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-12" id="navbar_change" style="background-color: ghostwhite;">
+        <nav class="sidebar">
+          <div class="position-sticky">
+            <ul class="nav nav-underline flex-column">
+              <li class="nav-item">
+                <a class="nav-link text-dark active" href="{% url 'home' %}" id="dashboard"><img src="/media/images/dashboard.png" class="mr-2" style="width: 20px; height: 20px;">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'personal_information' %}" id="personal_information"><img src="/media/images/personal_information_student.png" class="mr-2" style="width: 20px; height: 20px;">Personal Information</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'academic_information' %}" id="academic_information"><img src="/media/images/academic_information.png" class="mr-2" style="width: 20px; height: 20px;">Academic Information</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="/student/course" id="course"><img src="/media/images/course_student.png" class="mr-2" style="width: 20px; height: 20px;">Course</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="/student/attendance" id="attendance"><img src="/media/images/attendance_student.png" class="mr-2" style="width: 20px; height: 20px;">Attendance</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="#" id="events"><img src="/media/images/events_student.png" class="mr-2" style="width: 20px; height: 20px;">Events</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-dark" id="marks" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="/media/images/marks_student.png" class="mr-2" style="width: 20px; height: 20px;">Marks
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item text-dark" id="1st Year" href="/student/display_marks/1st Year">1st Year</a></li>
+                  <li><a class="dropdown-item text-dark" id="2nd Year" href="/student/display_marks/2nd Year">2nd Year</a></li>
+                  <li><a class="dropdown-item text-dark" id="3rd Year" href="/student/display_marks/3rd Year">3rd Year</a></li>
+                  <li><a href="/student/display_marks/4th Year" class="dropdown-item text-dark" id="4th Year">4th Year</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" id="change_password" href="/student/change_password"><img src="/media/images/change_password_student.png" class="mr-2" style="width: 20px; height: 20px;">Change Password</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" id="contact_us" href="/student/contact_us"><img src="/media/images/contact_us_student.png" class="mr-2" style="width: 20px; height: 20px;">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                  <a href="#" onclick="logout()" class="nav-link text-dark"><img src="/media/images/logout.png" class="mr-2" style="width: 20px; height: 20px;">Logout</a>
+              </li>
+            </ul>
+          </div>
+          <hr style="height: 3px;" noshade class="bg-secondary">
+        </nav>
+      </div>

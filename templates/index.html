@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include "includes.html" %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Home</title>
+    <link rel="icon" href="/media/science.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .first-heading-color {
+            background-color: cadetblue;
+        }
+        
+        .navbar-toggler-icon {
+            background-color: #000; 
+            border-radius: 2px; 
+            height: 2px; 
+            width: 20px; 
+          }
+
+        .oval-button {
+            border-radius: 60px;
+        }
+        .oval-button2 {
+            border-radius: 60px;
+        }
+        .background {
+            background-image: url("/media/images/student_exam.jpg");
+            background-size: cover;
+            height: 616px;
+            filter: brightness(100%);
+        }
+    </style>
+</head>
+<body>
+    <header class="container-fluid first-heading-color">
+        <div class="row">
+            <div class="col-sm-7 offset-1 pt-3">
+                <i style="font-size:17px; color: white;" class="fa">&#xf095; +91 9876543210</i>
+                <i style="font-size:17px; color: white;" class="pl-4 fa">&#xf0e0; student@gmail.com</i>
+            </div>
+            <div class="col-sm-3 offset-1">
+                <nav class="navbar navbar-dark navbar-expand-lg">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white;" href="/student/login">Student Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin" class="nav-link" style="color: white;">Admin Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <header class="container-fluid pt-3">
+        <div class="row">
+            <div class="col-sm-2 offset-1">
+                <img src="/media/icons/graphic.png" alt="Logo" style="height: 53px; width: 53px;">
+                <b>CampusConnect</b>
+            </div>
+            <div class="col-sm-6 offset-2">
+                <nav class="navbar navbar-dark navbar-expand-lg">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/student/home"><b>Home</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ml-3 text-dark"><b>Pages</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ml-3 text-dark"><b>Courses</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ml-3 text-dark"><b>Events</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ml-3 text-dark"><b>Blog</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ml-3 text-dark"><b>Contact</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ml-4 text-dark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link ml-4 pr-3 text-white oval-button first-heading-color pl-3">Go Teacher</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <section class="background">
+        <div class="container pt-5">
+            <div class="row pt-5">
+                <div class="col-sm-5 pt-5">
+                    <h6>Featured Notifications</h6>
+                    <h1><b>Education is the</b> key to success</h1>
+                    <h6>Making an impact on classrooms and communities</h6>
+                    <a href="/student/login" class="nav-link text-white mt-4 oval-button2 first-heading-color" style="width: 120px;">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

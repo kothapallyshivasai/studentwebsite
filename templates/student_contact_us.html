@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="icon" href="/media/science.png">
+    {% include 'includes.html' %}
+    <script>
+        $(document).ready(function() {
+          var home = document.getElementById("dashboard");
+          var attendance = document.getElementById("contact_us");
+          home.classList.remove("active");
+          attendance.classList.add("active");
+          var navbarChange = document.getElementById("navbar_change");
+          navbarChange.classList.replace("col-xl-2", "col-lg-2");
+        });
+    </script>
+</head>
+<body>
+    {% include "home_design.html" %}
+    <div class="col-lg-10 col-12 background-setter">
+        <form action="/student/submit_contact_us/" method="post" class="pr-sm-5 pl-sm-5">
+            {% csrf_token %}
+        <div class="card mt-3">
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <img src="/media/images/contact-us-student-page-3.png" height="190em" width="190em" alt="">
+                        <h2>Contact us</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 offset-2">
+                        <div class="mb-3">
+                            <label for="roll_number" class="form-label">Roll Number</label>
+                            <input type="text" id="roll_number" name="roll_number" required class="form-control" value="{{user}}" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 offset-2">
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" id="subject" name="subject" required class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 offset-2">
+                        <div>
+                              <label for="message" class="form-label">Message</label>
+                              <textarea class="form-control" name="message" required id="message" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-4">
+                    <div class="col-4 offset-4">
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+            <div class="pt-2"></div>
+        </div>
+        </form>
+    </div>
+</div>
+
+    {% if success == 'OK' %}
+    <script>
+        $(document).ready(function() {
+            $('#myModal').modal('show');
+        })
+  </script>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+            <h5 class="modal-title pl-5 ml-5" id="exampleModalLabel">Your response has been saved!</h5>
+            <a href="/student/contact_us"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="/student/contact_us">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </a>
+            </div>
+        </div>
+      </div>
+    {% elif success == 'NO' %}
+    <script>
+        $(document).ready(function() {
+            $('#myModal').modal('show');
+        })
+  </script>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+            <h5 class="modal-title pl-5" id="exampleModalLabel">Something went wrong, please try again!</h5>
+            <a href="/student/contact_us"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="/student/contact_us">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </a>
+            </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% include "logout_popup.html" %}
+
+</body>
+</html>

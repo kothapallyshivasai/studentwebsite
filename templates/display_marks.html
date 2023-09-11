@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks</title>
+    <link rel="icon" href="/media/science.png">
+    {% include 'includes.html' %}
+    <script>
+        $(document).ready(function() {
+          var home = document.getElementById("dashboard");
+          var marks = document.getElementById("marks");
+          marks.classList.add("active");
+          var year = document.getElementById("{{marks.year}}");
+          home.classList.remove("active");
+          year.classList.add("active");
+          var navbarChange = document.getElementById("navbar_change");
+          navbarChange.classList.replace("col-xl-2", "col-lg-2");
+        });
+    </script>
+</head>
+<body>
+    {% include "home_design.html" %}
+    <div class="col-lg-10 col-12 background-setter">
+        {% if condition %}
+        <script>
+        $(document).ready(function(){
+            $('#myModal').modal('show');
+        })
+        </script>
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                <h5 class="modal-title pl-4" id="exampleModalLabel">Results have not uploaded yet, Please Wait...</h5>
+                <a href="/student/student_home"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
+                </div>
+                <div class="modal-footer">
+                    <a href="/student/student_home">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </a>
+                </div>
+            </div>
+          </div>
+        {% endif %}
+            <div class="container-fluid">
+                
+                <div class="row mt-3">
+                    <div class="col-sm-10 offset-lg-2 mt-5 offset-sm-1">
+                        <h2 class="text-dark">{{marks.year}} Marks</h2>
+                        <p>These are not the final marks, You can evaluate your exams by submitting your issue in contact us.</p>
+                        <table class="table table-hover table-responsive">
+                            <thead class="table-dark">
+                              <tr>
+                                <th>No.</th>
+                                <th>Roll Number</th>
+                                <th>Subject</th>
+                                <th>Marks</th>
+                                <th>Grade</th>
+                                <th>Result</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr id="row_1">
+                                <td>1.</td>
+                                <td>{{marks.roll_number}}</td>
+                                <td>{{subjects.subject_1}}</td>
+                                <td>{{marks.subject_1}}</td>
+                                <td>{{grade1}}</td>
+                                <td>
+                                    {% if marks.subject_1 > 34 %}
+                                    Pass
+                                    <script>
+                                        $(document).ready(function() {
+                                            row = document.getElementById("row_1")
+                                            row.classList.add("table-success")
+                                        })
+                                    </script>
+                                    {% else %}
+                                    Fail
+                                        <script>
+                                            $(document).ready(function() {
+                                                row = document.getElementById("row_1")
+                                                row.classList.add("table-danger")
+                                            })
+                                        </script>
+                                    {% endif %}
+                                </td>
+                              </tr>
+                              <tr id="row_2">
+                                <td>2.</td>
+                                <td>{{marks.roll_number}}</td>
+                                <td>{{subjects.subject_2}}</td>
+                                <td>{{marks.subject_2}}</td>
+                                <td>{{grade2}}</td>
+                                <td>
+                                    {% if marks.subject_2 > 34 %}
+                                    Pass
+                                    <script>
+                                        $(document).ready(function() {
+                                            row = document.getElementById("row_2")
+                                            row.classList.add("table-success")
+                                        })
+                                    </script>
+                                    {% else %}
+                                    Fail
+                                        <script>
+                                            $(document).ready(function() {
+                                                row = document.getElementById("row_2")
+                                                row.classList.add("table-danger")
+                                            })
+                                        </script>
+                                    {% endif %}
+                                </td>
+                              </tr>
+                              <tr id="row_3">
+                                <td>3.</td>
+                                <td>{{marks.roll_number}}</td>
+                                <td>{{subjects.subject_3}}</td>
+                                <td>{{marks.subject_3}}</td>
+                                <td>{{grade3}}</td>
+                                <td>
+                                    {% if marks.subject_3 > 34 %}
+                                    Pass
+                                    <script>
+                                        $(document).ready(function() {
+                                            row = document.getElementById("row_3")
+                                            row.classList.add("table-success")
+                                        })
+                                    </script>
+                                    {% else %}
+                                    Fail
+                                        <script>
+                                            $(document).ready(function() {
+                                                row = document.getElementById("row_3")
+                                                row.classList.add("table-danger")
+                                            })
+                                        </script>
+                                    {% endif %}
+                                </td>
+                              </tr>
+                              <tr id="row_4">
+                                  <td>4.</td>
+                                  <td>{{marks.roll_number}}</td>
+                                  <td>{{subjects.subject_4}}</td>
+                                  <td>{{marks.subject_4}}</td>
+                                  <td>{{grade4}}</td>
+                                  <td>
+                                    {% if marks.subject_4 > 34 %}
+                                    Pass
+                                    <script>
+                                        $(document).ready(function() {
+                                            row = document.getElementById("row_4")
+                                            row.classList.add("table-success")
+                                        })
+                                    </script>
+                                    {% else %}
+                                    Fail
+                                        <script>
+                                            $(document).ready(function() {
+                                                row = document.getElementById("row_4")
+                                                row.classList.add("table-danger")
+                                            })
+                                        </script>
+                                    {% endif %}
+                                </td>
+                                </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 234px;"></div>
+    </div>
+</div>
+    {% include "logout_popup.html" %}
+</body>

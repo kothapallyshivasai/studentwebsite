@@ -1,0 +1,266 @@
+<!--
+                    xl ante monitor laptop dhi like pedha monitor
+                    lg ante normal laptop but barely 992 or above pani chesthadhi mostly preffered
+                    md ante barely tablet reach ayithadhi at exactly 768px or above
+                    sm ante 576 or above anthe dhani kindha motham normal aa
+                    col vaadali anthakante thakva pothe iga normal col aa best
+                -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    {% include 'includes.html' %}
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-center mt-4">Sign Up</h3>
+        <div class="row mt-4">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <form action="/student/test/" method="post">
+                    {% csrf_token %}
+                    {% include 'bs5_form.html' with form=form %}
+                    <button type="submit" class="btn bg-primary">Submit</button>
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+    <!--
+        Show messages
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+            views.py
+            
+            from django.contrib import messages
+            messages.success(request, "New user has created")
+    
+    
+    
+    
+        from django.shortcuts import render, redirect
+from .models import Student, Attendance
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+
+def home_page(request):
+    objects = Student.objects.all().filter(student_login_status = True)
+    if objects.count() > 0:
+        return redirect("/student/student_home")
+    return render(request, "index.html", {})
+
+def student_login_page(request):
+    objects = Student.objects.all().filter(student_login_status = True)
+    details_not_entered = False
+    if objects.count() > 0:
+        return redirect("/student/student_home")
+
+    try:
+        if request.session['details_not_entered']:
+            del request.session['details_not_entered']
+            details_not_entered = True
+    except Exception as e:
+        pass
+
+    try:
+        if request.session['user_not_exist']:
+            del request.session['user_not_exist']
+            user_not_exist = True
+        else:
+            user_not_exist = False    
+    except Exception as e:
+        user_not_exist = False
+    
+    return render(request, "student_login.html", {'user_not_exist': user_not_exist, 'details_not_entered': details_not_entered})
+
+def validate_student_login(request):
+    if request.method == 'POST':
+        roll_no = request.POST.get('roll_number')
+        password = request.POST.get('password')
+        if roll_no == "" or password == "":
+            request.session['details_not_entered'] = True
+            return redirect("/student/login")
+
+        try:
+            object = Student.objects.get(pk = roll_no)
+            if object.student_roll_number == roll_no and object.student_password == password:
+                object.student_login_status = True
+                object.save()
+                return redirect("/student/student_home")
+            else:
+                request.session['user_not_exist'] = True
+                return redirect("/student/login")                       
+        except Exception as e:
+            request.session['user_not_exist'] = True
+            return redirect("/student/login")       
+
+    else:
+        return redirect("/student/home")
+    
+
+def student_home_page(request):
+    objects = Student.objects.all().filter(student_login_status = True)
+    if objects.count() == 0:
+        return redirect("/student/home")
+    return render(request, "student_home.html", {"object": Student.objects.filter(student_login_status = True).first()})
+
+def student_logout(request):
+    object = Student.objects.filter(student_login_status = True).first()
+    if object is not None:
+        object.student_login_status = False
+        object.save()
+    return redirect("/student/home")
+
+def student_attendance(request):
+    objects = Student.objects.all().filter(student_login_status = True)
+    if objects.count() == 0:
+        return redirect("/student/home")
+    student = Student.objects.filter(student_login_status = True).first()
+    attendance = Attendance.objects.filter(student_roll_number = student.student_roll_number).first()
+    return render(request, "student_attendance_graph.html", {"object": student, "attendance": attendance})
+
+def student_change_password(request):
+    objects = Student.objects.all().filter(student_login_status = True)
+    if objects.count() == 0:
+        return redirect("/student/home")
+    student = Student.objects.filter(student_login_status = True).first()
+
+
+    if request.method == "POST":
+        old_password = request.POST.get("password")
+        new_password = request.POST.get("password2")
+        new_password2 = request.POST.get("password3")
+        if student.student_password != old_password:
+            messages.warning(request, "Invalid Password Entered!!")
+            request.session["non_valid_password"] = True
+            request.session["non_same_passwords"] = True
+            return redirect("/student/change_password")
+        
+        elif new_password == "" and new_password2 == "":
+            messages.warning(request, "Password should not be empty!!")
+            request.session["non_valid_password"] = False
+            request.session["non_same_passwords"] = True
+            return redirect("/student/change_password")
+
+        elif new_password != new_password2:
+            messages.warning(request, "Passwords Dont Match!!")
+            request.session["non_valid_password"] = False
+            request.session["non_same_passwords"] = True
+            return redirect("/student/change_password")
+
+        else:
+            student.student_password = new_password
+            student.save()
+            messages.success(request, "Password has changed successfully!!")
+            request.session["non_valid_password"] = False
+            request.session["non_same_passwords"] = False
+            return redirect("/student/change_password")
+
+    else:
+        non_valid_password = False
+        non_same_passwords = False
+        try:
+            if request.session["non_valid_password"] == True:
+                del request.session["non_valid_password"]
+                non_valid_password = True
+        except Exception as e:
+            pass
+
+        try:
+            if request.session["non_same_passwords"] == True:
+                del request.session["non_same_passwords"]
+                non_same_passwords = True
+        except Exception as e:
+            pass
+
+        return render(request, "student_change_password.html", {"object": student, "non_valid_password": non_valid_password, "non_same_passwords": non_same_passwords})
+
+def apply_student_password(request):
+    return redirect("/student/change_password")
+
+def test(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            # form.save()
+            return redirect("/student/home")
+    else:
+        form = UserCreationForm()
+        
+    return render(request, "test.html", {'form': form})
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  {% if user_not_exist %}
+  
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bg-danger">
+        <h5 class="modal-title pl-5 ml-5" id="exampleModalLabel">Invalid Username or Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></butto>
+        </div>
+        <div class="modal-body">
+        <p>Please check the given Roll Number and Password correctly before submitting.</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Ok</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+  <script>
+    $(document).ready(function() {
+      $('#myModal').modal('show');
+    });
+  </script>
+  {% endif %}        
+
+  {% if details_not_entered %}
+
+  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header bg-danger">
+        <h5 class="modal-title pl-5 ml-3" id="exampleModalLabel">
+            NO USERNAME AND PASSWORD!!    
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></butto>
+        </div>
+        <div class="modal-body">
+        <p>Username or password are missing, Kindly enter username and password properly.</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Ok</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+  <script>
+    $(document).ready(function() {
+      $('#myModal').modal('show');
+    });
+  </script>
+
+  {% endif %}
+        -->
+</body>
+</html>

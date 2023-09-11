@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <link rel="icon" href="/media/science.png">
+    {% include 'includes.html' %}
+    <script>
+        $(document).ready(function() {
+          var home = document.getElementById("dashboard");
+          var course = document.getElementById("course");
+          home.classList.remove("active");
+          course.classList.add("active");
+          var navbarChange = document.getElementById("navbar_change");
+          navbarChange.classList.replace("col-xl-2", "col-lg-2");
+        });
+    </script>
+</head>
+<body>
+    {% include "home_design.html" %}
+    <div class="col-lg-10 col-12 background-setter">
+        <div class="container-fluid">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="card bg-info">
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <div class="col-12 text-center">
+                                    {% if student.student_branch == "Computer Science & Engineering" %}
+                                        <img src="/media/images/cse_image.png" style="height: 10em; width: 10em;" alt="">
+                                        <h2>{{student.student_branch}}</h2>
+
+                                    {% elif student.student_branch == "Mechanical Engineering" %}
+                                        <img src="/media/images/me_image.png" style="height: 10em; width: 10em;" alt="">
+                                        <h2>{{student.student_branch}}</h2>
+
+                                    {% elif student.student_branch == "Civil Engineering" %}
+                                        <img src="/media/images/ce_image.png" style="height: 10em; width: 10em;" alt="">
+                                        <h2>{{student.student_branch}}</h2>
+
+                                    {% elif student.student_branch == "Electrical & Electronics Engineering" %}
+                                        <img src="/media/images/eee_image.png" style="height: 10em; width: 10em;" alt="">
+                                        <h2>{{student.student_branch}}</h2>
+    
+                                    {% elif student.student_branch == "Electronics and Communications Engineering" %}
+                                        <img src="/media/images/ece_image.png" style="height: 10em; width: 10em;" alt="">
+                                        <h2>{{student.student_branch}}</h2>
+
+                                    {% endif %}
+                                </div>
+                                <div class="col-lg-10 offset-lg-1 col-12">
+                                <div class="card border-black mt-3">
+                                    <div class="card-body">
+                                            <p><i>{{branch.description}}</i></p>
+                                            <p><i>
+                                                <pre>{{branch.points}}</pre>
+                                            </i></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>    
+    {% include 'logout_popup.html' %}
+</body>
+</html>

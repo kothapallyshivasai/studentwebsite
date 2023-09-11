@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link rel="icon" href="/media/science.png">
+    {% include "includes.html" %}
+    <style>
+        body{
+            background-image: url("/media/images/fingerprint-identity-sensor-data-protection-system-podium-hologram-blue-light-and-concept-free-vector.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            var username = document.getElementById("id_username");
+            var password = document.getElementById("id_password");
+            username.removeAttribute("required");
+            password.removeAttribute("required");
+        })
+        function show_password()
+        {
+        var passwordField = document.getElementById("id_password");
+        var showButton = document.getElementById("display");
+        var hidePassword = document.getElementById("hideit")
+        passwordField.type = "text";
+        showButton.hidden = true;
+        hidePassword.hidden = false;
+        }
+        function hide_password()
+        {
+            var passwordField = document.getElementById("id_password");
+            var showButton = document.getElementById("display");
+            var hidePassword = document.getElementById("hideit")
+            passwordField.type = "password";
+            showButton.hidden = false;
+            hidePassword.hidden = true;
+        }
+    </script>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-8 offset-2 text-center text-success">
+                    <img src="/media/images/graduates.png" class="rounded" width="200em" height="200em" alt="Icon for students">
+                    <h2>Student Login</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8 offset-2 ">
+                    {% include 'bs5_form.html' with form=form %}
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-8 offset-2">
+                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                </div>
+            </div>
+        </div>
+      </form>
+</div>
+</body>
+</html>

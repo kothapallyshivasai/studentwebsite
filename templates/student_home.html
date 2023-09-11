@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Home</title>
+    {% include 'includes.html' %}
+    <link rel="icon" href="/media/science.png">
+</head>
+<body>
+    {% include 'home_design.html' %}
+      
+      <div class="col-lg-10 col-12 background-setter">
+        <div class="card mt-3" style="border-radius: 3px; border-color: black;">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-5 col-sm-12">
+                <div class="card" style="border-radius: 3px; border-color: black;">
+                  <div class="card-body wallpaper-photo-student" style="height: 35em;">
+                  </div>
+                </div>
+              </div>
+            
+              <div class="col-lg-7 col-12 pt-sm-2">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <img src="/media/images/hello_student.png" class="mr-2" style="width: 5em; height: 5em;">
+                    </div>
+                  </div>
+                  <div class="row mt-2 no-margin">
+                    <div class="col-sm-12 ml-2" style="display: flex;">
+                      <h1 class="mr-2">I'm</h1>
+                      <h1><strong style="font-family: Arial, Helvetica, sans-serif;">{{object.student_first_name}} {{object.student_last_name}} </strong></h1>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 ml-2">
+                      <h4>{{object.student_branch}}</h4>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <hr style="height: 2px;" noshade class="bg-secondary">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3 ml-2">
+                      <p class="mt-1"><b>DATE OF BIRTH</b></p>              
+                    </div>
+                    <div class="col-sm-7 offset-1">
+                      <p class="mt-1 text-muted"><img src="/media/images/date_of_birth_student.png" class="mr-1" style="width: 23px; height: 23px;"> {{object.student_date_of_birth}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3 ml-2">
+                      <p class="mt-1"><b>ADDRESS</b></p>                    
+                    </div>
+                    <div class="col-sm-7 offset-1">
+                      <p class="mt-1 text-muted"><img src="/media/images/location_student.png" class="mr-1" style="width: 23px; height: 23px;"> {{object.student_address}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3 ml-2">
+                      <p class="mt-1"><b>E-MAIL</b></p>                   
+                    </div>
+                    <div class="col-sm-7 offset-1">
+                      <p class="mt-1 text-muted"><img src="/media/images/gmail_student.png" class="mr-1" style="width: 25px; height: 25px;">{{user.email}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3 ml-2">
+                      <p class="mt-1"><b>PHONE</b></p>                   
+                    </div>
+                    <div class="col-sm-7 offset-1">
+                      <p class="mt-1 text-muted"><img src="/media/images/phone_contact_student.png" class="mr-1" style="width: 23px; height: 23px;">+91 {{object.student_phone_number}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3 ml-2">
+                      <p class="mt-1"><b>DESCRIPTION</b></p>                   
+                    </div>
+                    <div class="col-sm-7 offset-1">
+                      <p class="mt-1 text-muted"><img src="/media/images/description_student.png" class="mr-1" style="width: 23px; height: 23px;">{{object.student_description}}</p>
+                    </div>
+                  </div>
+                  <hr style="height: 2px;" noshade class="bg-secondary">
+                  <div class="row ml-5">
+
+                    <div class="col-sm-3 col-3">
+                      <a href="https://linkedin.com/" target="_blank">
+                      <img src="/media/images/linkedin_student.png" class="mr-1" style="width: 27px; height: 27px;">
+                    </a>
+                    </div>
+
+                    <div class="col-sm-3 col-3">
+                      <a href="https://instagram.com/" target="_blank">
+                      <img src="/media/images/instagram_student.png" class="mr-1" style="width: 27px; height: 27px;">
+                    </a>
+                    </div>
+
+                    <div class="col-sm-3 col-3">
+                      <a href="https://twitter.com/" target="_blank">
+                      <img src="/media/images/twitter_student.png" class="mr-1" style="width: 27px; height: 27px;">
+                    </a>
+                    </div>
+
+                    <div class="col-sm-3 col-3">
+                      <a href="https://github.com/" target="_blank">
+                      <img src="/media/images/github_student.png" class="mr-1" style="width: 27px; height: 27px;">
+                    </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+      {% include 'logout_popup.html' %}
+
+</body>
+</html>
